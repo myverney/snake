@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    #map {
+      width: 800px;
+      height: 600px;
+      background-color: #ccc;
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript">
+  /*
+  snake
+  绘制蛇
+  */
+  function Snake(map,width,height){
+    this.map = map;
+    this.width = width || 20;
+    this.height = height || 20;
+    // 蛇的身体（DOM节点）
+    this.bodys = [];
+    // 蛇的节点数据
+    this.datas = [{
+      x : 3,
+      y : 2,
+      color : 'red'
+    },{
+      x : 2,
+      y : 2,
+      color : 'blue'
+    },{
+      x : 1,
+      y : 2,
+      color : 'blue'
+    }]
+  }
+  Snake.prototype.render = function(){
+    var that = this;
+    this.datas.forEach(function(item){
+      // 创建蛇的节点
+      var div = document.createElement('div');
+      div.style.position = 'absolute';
+      div.style.width = that.width + 'px';
+      div.style.height = that.height + 'px';
+      div.style.backgroundColor = item.color;
+      div.style.left = item.x * that.width + 'px';
+      div.style.top = item.y * that.height + 'px';
+      // 把节点追加到地图中
+      that.map.appendChild(div);
+      that.bodys.push(div);
+    });
+  }
+  </script>
+</head>
+<body>
+  <div id="map"></div>
+  <script type="text/javascript">
+    var snake = new Snake(document.getElementById('map'));
+    snake.render();
+  </script>
+</body>
+</html>

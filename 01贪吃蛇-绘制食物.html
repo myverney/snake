@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    #map {
+      width: 800px;
+      height: 600px;
+      background-color: #ccc;
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript">
+  /*
+  绘制食物
+  */
+  onload = function(){
+    function Food(map,x,y,width,height,color){
+      this.map = map;
+      this.x = x || 0;
+      this.y = y || 0;
+      this.width = width || 20;
+      this.height = height || 20;
+      this.color = color || 'green';
+    }
+
+    Food.prototype.render = function(){
+      // 随机生成食物的坐标
+      this.x = parseInt(Math.random()*(this.map.offsetWidth/this.width)) * this.width;
+      this.y = parseInt(Math.random()*(this.map.offsetHeight/this.height)) * this.height;
+      // 创建食物
+      var div = document.createElement('div');
+      div.style.position = 'absolute';
+      div.style.width = this.width + 'px';
+      div.style.height = this.height + 'px';
+      div.style.backgroundColor = this.color;
+      div.style.left = this.x + 'px';
+      div.style.top = this.y + 'px';
+      // 把食物放到地图中
+      this.map.appendChild(div);
+    }
+
+    var food = new Food(document.getElementById('map'));
+    food.render();
+  }
+  </script>
+</head>
+<body>
+  <div id="map"></div>
+</body>
+</html>
